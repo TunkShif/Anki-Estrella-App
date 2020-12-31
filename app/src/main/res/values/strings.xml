@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name" translatable="false">Anki Estrella</string>
+
+    <string name="bottom_bar_pic">OCR</string>
+    <string name="bottom_bar_batch">Batch</string>
+    <string name="bottom_bar_fab_desc">Add a new profile</string>
+    <string name="profile_image_desc">Profile Image</string>
+    <string name="profile_pop_up_edit">Edit</string>
+    <string name="profile_pop_up_delete">Delete</string>
+    <string name="text_input_profile_name">Profile Name</string>
+    <string name="text_input_profile_source">Source</string>
+    <string name="text_input_profile_deck_name">Deck Name</string>
+    <string name="text_input_profile_model">Model</string>
+    <string name="input_text_field">Field</string>
+    <string name="text_input_pop_up_look_up">Look Up</string>
+
+    <string name="source_name_basic">Basic</string>
+    <string name="source_name_basic_desc">The Basic card with front and back sides</string>
+    <string name="source_name_spanish_dict">Spanish Dict</string>
+    <string name="source_desc_spanish_dict">Best dictionary for Spanish learners!</string>
+
+    <string name="field_available_word">Word</string>
+    <string name="field_available_phonetic">Phonetic</string>
+    <string name="field_available_part_of_speech">Part of Speech</string>
+    <string name="field_available_definition">Definition</string>
+    <string name="field_available_sentence">Sentence</string>
+    <string name="field_available_audio">Audio</string>
+    <string name="field_available_front">Front</string>
+    <string name="field_available_back">Back</string>
+
+    <string name="warning_info_no_sentence">Can\'t find example sentence for this word.</string>
+    <string name="top_bar_menu_save">Save</string>
+</resources>

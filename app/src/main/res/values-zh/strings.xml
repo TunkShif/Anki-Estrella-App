@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_navigation_home">主页</string>
+    <string name="bottom_navigation_profiles">方案</string>
+    <string name="bottom_navigation_settings">设定</string>
+    <string name="bottom_bar_batch">Add</string>
+    <string name="bottom_bar_pic">OCR</string>
+    <string name="profile_image_desc">Profile Image</string>
+</resources>

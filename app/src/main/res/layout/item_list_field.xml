@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+    android:id="@+id/text_input_field_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/input_text_field"
+    android:paddingTop="@dimen/default_spacing"
+    android:paddingBottom="@dimen/default_spacing"
+    app:startIconDrawable="@drawable/ic_baseline_short_text_24">
+
+    <AutoCompleteTextView
+        android:id="@+id/text_input_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/text_input_field"
+        android:inputType="none" />
+</com.google.android.material.textfield.TextInputLayout>
