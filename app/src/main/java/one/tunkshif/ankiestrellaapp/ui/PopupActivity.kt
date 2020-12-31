@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +16,7 @@ import one.tunkshif.ankiestrellaapp.model.Definition
 import one.tunkshif.ankiestrellaapp.model.Word
 import one.tunkshif.ankiestrellaapp.model.sources.SpanishDict
 import one.tunkshif.ankiestrellaapp.ui.adapter.DefinitionAdapter
-import java.lang.IllegalArgumentException
+import one.tunkshif.ankiestrellaapp.utils.makeToast
 import kotlin.concurrent.thread
 
 class PopupActivity : AppCompatActivity() {
@@ -32,13 +31,7 @@ class PopupActivity : AppCompatActivity() {
             when (msg.what) {
                 MSG_FETCH_WORD_SUCCESS -> {
                     val word = msg.obj as Word
-                    if (recyclerView.visibility == View.GONE) {
-                        recyclerView.visibility = View.VISIBLE
-                    }
-                    recyclerViewAdapter.isTranslationShort = true // TODO
-                    definitionList.clear()
-                    definitionList.addAll(word.definitions)
-                    recyclerView.adapter!!.notifyDataSetChanged()
+                    updateDefinitionListView(word)
                 }
             }
         }
@@ -46,6 +39,7 @@ class PopupActivity : AppCompatActivity() {
 
     private val definitionList = mutableListOf<Definition>()
 
+    private val transparentExitButton: Button by lazy { findViewById(R.id.button_pop_up_transparent) }
     private val inputSearchLayout: TextInputLayout by lazy { findViewById(R.id.text_input_pop_up_search_layout) }
     private val inputSearch: TextInputEditText by lazy { findViewById(R.id.text_input_pop_up_search) }
     private val recyclerView: RecyclerView by lazy { findViewById(R.id.recycler_definitions) }
@@ -55,11 +49,9 @@ class PopupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_popup)
 
-        inputSearchLayout.setEndIconOnClickListener {
+        transparentExitButton.setOnClickListener { finish() }
 
-            TODO()
-
-        }
+        inputSearchLayout.setEndIconOnClickListener { asyncWordQuery() }
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@PopupActivity).apply {
@@ -68,5 +60,31 @@ class PopupActivity : AppCompatActivity() {
             adapter = DefinitionAdapter(this@PopupActivity, definitionList)
         }
 
+    }
+
+    private fun updateDefinitionListView(word: Word) {
+        if (recyclerView.visibility == View.GONE) {
+            recyclerView.visibility = View.VISIBLE
+        }
+        recyclerViewAdapter.isTranslationShort = true // TODO
+        definitionList.clear()
+        definitionList.addAll(word.definitions)
+        recyclerView.adapter!!.notifyDataSetChanged()
+    }
+
+    private fun asyncWordQuery() {
+        thread {
+            val query = inputSearch.text.toString()
+            val word = SpanishDict.wordQuery(query)
+            if (word != null) {
+                val msg = Message().apply {
+                    what = MSG_FETCH_WORD_SUCCESS
+                    obj = word
+                }
+                handler.sendMessage(msg)
+            } else {
+                makeToast("Can't find word $query in SpanishDict")
+            }
+        }
     }
 }

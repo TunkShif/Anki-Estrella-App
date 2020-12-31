@@ -24,6 +24,6 @@ abstract class DictSource : Source() {
     abstract val apiUrl: String
     abstract val isPhraseAvailable: Boolean
 
-    abstract fun wordQuery(query: String): Word
+    abstract fun wordQuery(query: String): Word?
 
 }

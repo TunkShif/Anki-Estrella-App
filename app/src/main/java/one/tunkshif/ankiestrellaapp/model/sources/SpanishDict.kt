@@ -11,7 +11,7 @@ object SpanishDict : DictSource() {
     override val name: String = "SpanishDict"
     override val displayName: String = getStringFromResources(R.string.source_name_spanish_dict)
     override val description: String = getStringFromResources(R.string.source_desc_spanish_dict)
-    override val apiUrl: String = "https://dictlet.herokuapp.com/spanishdict/"
+    override val apiUrl: String = "https://www.spanishdict.com/translate/"
     override val isPhraseAvailable: Boolean = false
     override val fieldsAvailableList: List<String>
         get() = listOf(
@@ -22,7 +22,7 @@ object SpanishDict : DictSource() {
             getStringFromResources(R.string.field_available_sentence)
         )
 
-    override fun wordQuery(query: String): Word {
+    override fun wordQuery(query: String): Word? {
         val response = Jsoup.connect(apiUrl + query).get()
         val doc = response.select("#dictionary-neodict-es")
 
@@ -52,9 +52,11 @@ object SpanishDict : DictSource() {
             }
 
             return Word(word, audio, null, definitions)
-        } else {
-            throw NullPointerException("Can't find the word $query in ${this.displayName}!")
         }
+        return null
+//        else {
+//            throw NullPointerException("Can't find the word $query in ${this.displayName}!")
+//        }
     }
 
     override fun mapValueToFieldsList(): Map<String, String> {
