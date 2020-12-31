@@ -33,6 +33,10 @@ class PopupActivity : AppCompatActivity() {
                     val word = msg.obj as Word
                     updateDefinitionListView(word)
                 }
+                MSG_FETCH_WORD_FAILED -> {
+                    val s = msg.obj as String
+                    makeToast("Can't find the word $s in SpanishDict")
+                }
             }
         }
     }
@@ -76,15 +80,19 @@ class PopupActivity : AppCompatActivity() {
         thread {
             val query = inputSearch.text.toString()
             val word = SpanishDict.wordQuery(query)
+            val msg = Message()
             if (word != null) {
-                val msg = Message().apply {
+                msg.apply {
                     what = MSG_FETCH_WORD_SUCCESS
                     obj = word
                 }
-                handler.sendMessage(msg)
             } else {
-                makeToast("Can't find word $query in SpanishDict")
+                msg.apply {
+                    what = MSG_FETCH_WORD_FAILED
+                    obj = query
+                }
             }
+            handler.sendMessage(msg)
         }
     }
 }
