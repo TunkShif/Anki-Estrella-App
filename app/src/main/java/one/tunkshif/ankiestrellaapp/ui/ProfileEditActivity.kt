@@ -9,10 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import one.tunkshif.ankiestrellaapp.R
-import one.tunkshif.ankiestrellaapp.api.AnkiDroidHelper
-import one.tunkshif.ankiestrellaapp.model.Source
+import one.tunkshif.ankiestrellaapp.utils.AnkiDroidHelper
 import one.tunkshif.ankiestrellaapp.model.Sources
-import one.tunkshif.ankiestrellaapp.ui.adapter.DefinitionAdapter
 import one.tunkshif.ankiestrellaapp.ui.adapter.FieldAdapter
 
 class ProfileEditActivity : AppCompatActivity() {

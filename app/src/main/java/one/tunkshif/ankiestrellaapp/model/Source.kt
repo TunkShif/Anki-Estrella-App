@@ -17,7 +17,6 @@ object Sources {
     val sourceList: MutableMap<String, Source>
         get() = mutableMapOf(Basic.name to Basic, SpanishDict.name to SpanishDict)
 
-    fun getSourceInstance(name: String) = sourceList[name]
 }
 
 abstract class DictSource : Source() {

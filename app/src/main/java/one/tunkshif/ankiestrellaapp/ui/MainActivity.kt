@@ -3,7 +3,6 @@ package one.tunkshif.ankiestrellaapp.ui
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -12,10 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import one.tunkshif.ankiestrellaapp.R
-import one.tunkshif.ankiestrellaapp.api.AnkiDroidHelper
 import one.tunkshif.ankiestrellaapp.model.Profile
 import one.tunkshif.ankiestrellaapp.ui.adapter.ProfileAdapter
-import one.tunkshif.ankiestrellaapp.utils.makeToast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package one.tunkshif.ankiestrellaapp.api
+package one.tunkshif.ankiestrellaapp.utils
 
 import android.app.Activity
 import android.content.Context
