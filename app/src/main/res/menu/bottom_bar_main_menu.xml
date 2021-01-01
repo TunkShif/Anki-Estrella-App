@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bottom_bar_pic"
+        android:id="@+id/bottom_bar_menu_item_pic"
         android:icon="@drawable/ic_baseline_insert_photo_24"
         android:title="@string/bottom_bar_pic"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/bottom_bar_batch"
+        android:id="@+id/bottom_bar_menu_item_batch"
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
         android:title="@string/bottom_bar_batch"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/bottom_bar_more"
+        android:id="@+id/bottom_bar_menu_item_more"
         android:title="@string/app_name"
         app:showAsAction="never" />
 </menu>

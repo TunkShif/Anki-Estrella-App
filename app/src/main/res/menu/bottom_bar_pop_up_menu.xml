@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bottom_bar_tag"
+        android:id="@+id/bottom_bar_menu_item_tag"
         android:icon="@drawable/ic_tag"
         android:title="@string/bottom_bar_pic"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/bottom_bar_note"
+        android:id="@+id/bottom_bar_menu_item_note"
         android:icon="@drawable/ic_baseline_sticky_note_2_24"
         android:title="@string/bottom_bar_batch"
         app:showAsAction="ifRoom" />

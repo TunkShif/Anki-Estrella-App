@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/top_bar_save"
+        android:id="@+id/top_bar_menu_item_save"
         android:icon="@drawable/ic_baseline_save_24"
         android:title="@string/top_bar_menu_save"
         app:showAsAction="ifRoom" />
