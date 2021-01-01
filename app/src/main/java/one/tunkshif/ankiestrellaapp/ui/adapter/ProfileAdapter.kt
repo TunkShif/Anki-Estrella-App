@@ -53,11 +53,11 @@ class ProfileAdapter(private val context: Context, private val profileList: List
 
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
-                    R.id.profile_pop_up_edit -> {
+                    R.id.profile_pop_up_menu_item_edit -> {
                         Toast.makeText(context, "Edit", Toast.LENGTH_LONG).show()
                         true
                     }
-                    R.id.profile_pop_up_delete -> {
+                    R.id.profile_pop_up_menu_item_delete -> {
                         Toast.makeText(context, "Delete", Toast.LENGTH_LONG).show()
                         true
                     }

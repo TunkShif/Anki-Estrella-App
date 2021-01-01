@@ -28,6 +28,7 @@
     <string name="field_available_front">Front</string>
     <string name="field_available_back">Back</string>
 
+    <string name="warning_text_input_fields_empty">Please fill out all input text field.</string>
     <string name="warning_info_no_sentence">Can\'t find example sentence for this word.</string>
     <string name="top_bar_menu_save">Save</string>
 </resources>
