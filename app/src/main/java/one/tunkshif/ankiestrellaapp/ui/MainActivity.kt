@@ -1,5 +1,6 @@
 package one.tunkshif.ankiestrellaapp.ui
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import one.tunkshif.ankiestrellaapp.R
 import one.tunkshif.ankiestrellaapp.model.Profile
 import one.tunkshif.ankiestrellaapp.ui.adapter.ProfileAdapter
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     private val bottomFab: FloatingActionButton by lazy { findViewById(R.id.bottom_fab) }
     private val recyclerView: RecyclerView by lazy { findViewById(R.id.recycler_profiles) }
+
+    lateinit var profileList: List<Profile>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,18 +43,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        val profileList = listOf(
-            Profile("Spanish Dict", R.drawable.ic_color_search),
-            Profile("Haha 2", R.drawable.ic_color_tag),
-            Profile("scd", R.drawable.ic_color_search),
-            Profile("Haha 2", R.drawable.ic_color_tag),
-            Profile("Spanish Dict", R.drawable.ic_color_search),
-            Profile("Haha 2", R.drawable.ic_color_tag),
-            Profile("Spanish Dict", R.drawable.ic_color_search),
-            Profile("Spanish Dict", R.drawable.ic_color_search),
-            Profile("Haha 2", R.drawable.ic_color_tag),
-            Profile("scd", R.drawable.ic_color_search),
-        )
+        loadProfiles()
 
         recyclerView.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
@@ -66,6 +59,14 @@ class MainActivity : AppCompatActivity() {
         } else {
             ActivityCompat.requestPermissions(this, arrayOf("com.ichi2.anki.permission.READ_WRITE_DATABASE"), 1)
         }
+    }
+
+    private fun loadProfiles() {
+        val gson = Gson()
+        val prefs = getSharedPreferences("profiles", Context.MODE_PRIVATE)
+        val profiles = prefs.getStringSet("profiles", mutableSetOf())!!
+        profileList = if (profiles.isEmpty()) emptyList() else
+            prefs.getStringSet("profiles", mutableSetOf())!!.toMutableList().map { gson.fromJson(it, Profile::class.java) }
     }
 
 }

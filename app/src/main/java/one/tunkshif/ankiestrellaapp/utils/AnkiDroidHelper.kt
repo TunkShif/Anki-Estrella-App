@@ -116,7 +116,6 @@ object AnkiDroidHelper {
         return null
     }
 
-
     fun findDeckIdByName(deckName: String): Long? {
         val deckDb = context.getSharedPreferences(ANKI_DECK_REF_DB, Context.MODE_PRIVATE)
         var deckId = getDeckId(deckName)

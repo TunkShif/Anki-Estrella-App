@@ -10,6 +10,7 @@ import org.jsoup.Jsoup
 object SpanishDict : DictSource() {
     override val name: String = "SpanishDict"
     override val displayName: String = getStringFromResources(R.string.source_name_spanish_dict)
+    override val iconId: Int = R.drawable.ic_color_tag
     override val description: String = getStringFromResources(R.string.source_desc_spanish_dict)
     override val apiUrl: String = "https://www.spanishdict.com/translate/"
     override val isPhraseAvailable: Boolean = false

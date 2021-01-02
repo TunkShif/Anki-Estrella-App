@@ -1,5 +1,6 @@
 package one.tunkshif.ankiestrellaapp.model
 
+import one.tunkshif.ankiestrellaapp.R
 import one.tunkshif.ankiestrellaapp.model.sources.Basic
 import one.tunkshif.ankiestrellaapp.model.sources.SpanishDict
 
@@ -8,6 +9,7 @@ abstract class Source {
     abstract val displayName: String
     abstract val description: String
     abstract val fieldsAvailableList: List<String>
+    open val iconId: Int = R.drawable.ic_color_search
 
     abstract fun mapValueToFieldsList(): Map<String, String>
 }

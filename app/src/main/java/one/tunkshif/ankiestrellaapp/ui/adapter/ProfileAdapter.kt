@@ -41,7 +41,7 @@ class ProfileAdapter(private val context: Context, private val profileList: List
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val profile = profileList[position]
         holder.profileNameView.text = profile.name
-        holder.profileImageView.setImageResource(profile.imageId)
+        holder.profileImageView.setImageResource(profile.iconId)
     }
 
     override fun getItemCount() = profileList.size

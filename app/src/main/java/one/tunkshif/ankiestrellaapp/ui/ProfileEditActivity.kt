@@ -1,5 +1,6 @@
 package one.tunkshif.ankiestrellaapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import one.tunkshif.ankiestrellaapp.R
+import one.tunkshif.ankiestrellaapp.model.Profile
 import one.tunkshif.ankiestrellaapp.utils.AnkiDroidHelper
 import one.tunkshif.ankiestrellaapp.model.Sources
 import one.tunkshif.ankiestrellaapp.ui.adapter.FieldAdapter
@@ -46,7 +49,7 @@ class ProfileEditActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.top_bar_menu_item_save -> {
                     if (isFieldFilled()) {
-                        TODO()
+                        saveProfile()
                     } else {
                         makeToast(getStringFromResources(R.string.warning_text_input_fields_empty))
                     }
@@ -65,8 +68,10 @@ class ProfileEditActivity : AppCompatActivity() {
 
         inputFieldSource.setOnItemClickListener { parent, _, position, _ ->
             Log.d("ANKI-ES", "Update available fields")
-            val source = Sources.sourceList[parent.getItemAtPosition(position)]
-            recyclerViewAdapter.fieldAvailableList = source?.fieldsAvailableList ?: listOf()
+            val sourceName = parent.getItemAtPosition(position)
+            val source = Sources.sourceList.values.first { it.displayName == sourceName }
+            Log.d("ANKI-ES", "${source.fieldsAvailableList}")
+            recyclerViewAdapter.fieldAvailableList = source.fieldsAvailableList
             recyclerView.adapter!!.notifyDataSetChanged()
         }
 
@@ -80,7 +85,7 @@ class ProfileEditActivity : AppCompatActivity() {
     }
 
     private fun isFieldFilled(): Boolean {
-        // need a better way for input field validating
+        // FIXME: need a better way for input field validating
         if (inputFieldProfile.text.toString() == "") {
             return false
         }
@@ -104,8 +109,42 @@ class ProfileEditActivity : AppCompatActivity() {
         return true
     }
 
+    private fun saveProfile() {
+        val gson = Gson()
+
+        val name = inputFieldProfile.text.toString()
+
+        val sourceName = inputFieldSource.text.toString()
+        // TODO: bugs
+        val source = Sources.sourceList[sourceName]!!
+
+        val iconId = source.iconId
+
+        val deck = inputFieldDeck.text.toString()
+        val model = inputFieldModel.text.toString()
+
+        val fieldMap = mutableMapOf<String, String>()
+
+        val fieldCount = recyclerViewAdapter.itemCount
+
+        for (i in 0 until fieldCount) {
+            val textInputView: AutoCompleteTextView = recyclerView.layoutManager!!.findViewByPosition(i)!!.findViewById(R.id.text_input_field)
+            fieldMap[textInputView.hint.toString()] = textInputView.text.toString()
+        }
+
+        val profile = Profile(name, iconId, sourceName, deck, model, fieldMap)
+
+        val prefs = getSharedPreferences("profiles", Context.MODE_PRIVATE)
+        val profiles = prefs.getStringSet("profiles", mutableSetOf())
+        // TODO: check duplicate before saving
+        profiles!!.add(gson.toJson(profile))
+        val editor = prefs.edit()
+        editor.putStringSet("profiles", profiles)
+        editor.apply()
+    }
+
     private fun updateSourceListView() {
-        val sourceNameList = Sources.sourceList.values.toList().map { it.name }
+        val sourceNameList = Sources.sourceList.values.toList().map { it.displayName }
         inputFieldSource.setAdapter(ArrayAdapter(this, R.layout.item_dropdown_list, sourceNameList))
     }
 
